@@ -1,0 +1,8 @@
+data <- read.table(pipe('grep "^[1-2]/2/2007" "household_power_consumption.txt"'),header=FALSE, sep=';')
+data$V2<- strptime(paste(data$V1,data$V2), "%d/%m/%Y %H:%M:%S")
+png(filename='plot3.png', width=480, height=480)
+plot(data$V2, data$V7, type='l', xlab='', col='black', ylab='energy sub metering')
+lines(data$V2, data$V8, col='red')
+lines(data$V2, data$V9, col='blue')
+legend("topright", lty=c(1,1), col = c("black", "blue", "red"), c("sub_metering_1","sub_metering_2","sub_metering_3"))
+dev.off()
